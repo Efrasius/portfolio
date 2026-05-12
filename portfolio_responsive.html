@@ -1,0 +1,1153 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body,
+  .portfolio-root {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: #FAF7F2;
+    color: #2C2420;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: #D4956A40;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+
+  .reveal-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .reveal-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+
+  .reveal-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .delay-1 {
+    transition-delay: 0.1s;
+  }
+
+  .delay-2 {
+    transition-delay: 0.2s;
+  }
+
+  .delay-3 {
+    transition-delay: 0.3s;
+  }
+
+  .delay-4 {
+    transition-delay: 0.45s;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #FAF7F2;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #D4956A;
+    border-radius: 3px;
+  }
+
+  nav a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .skill-pill {
+    display: inline-block;
+    padding: 4px 14px;
+    border: 1px solid #E8C49A;
+    border-radius: 999px;
+    font-size: 12px;
+    color: #6B4C3B;
+    background: #FFFFFF;
+    letter-spacing: 0.02em;
+  }
+
+  .screen-placeholder {
+    background: linear-gradient(135deg, #E8E2D9, #E8C49A30);
+    border: 1px solid #E8C49A;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9C7B6E;
+    font-size: 13px;
+    aspect-ratio: 16/8;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .screen-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(45deg, transparent, transparent 20px, #E8C49A20 20px, #E8C49A20 21px);
+  }
+
+  .badge-production {
+    background: #E8F5E9;
+    color: #2E7D32;
+    border: 1px solid #A5D6A7;
+  }
+
+  .badge-beta {
+    background: #FFF8E1;
+    color: #F57F17;
+    border: 1px solid #F0D080;
+  }
+
+  .badge-concept {
+    background: #E8E2D9;
+    color: #6B4C3B;
+    border: 1px solid #E8C49A;
+  }
+
+  @keyframes scrollPulse {
+
+    0%,
+    100% {
+      opacity: 0.4;
+      transform: scaleY(1);
+    }
+
+    50% {
+      opacity: 1;
+      transform: scaleY(1.2);
+    }
+  }
+
+  /* ── NAV ── */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 0 clamp(16px, 5vw, 80px);
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.4s ease;
+  }
+
+  .nav.scrolled {
+    background: #FFFFFFF0;
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #E8C49A;
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: #2C2420;
+    letter-spacing: 0.05em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: clamp(16px, 3vw, 32px);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .nav-links a {
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .nav-links a:hover {
+    color: #B87333;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(150deg, #2C2420 0%, #6B4C3B 60%, #B87333 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: clamp(80px, 12vw, 120px) clamp(16px, 8vw, 120px) 60px;
+  }
+
+  .hero-texture {
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 50%);
+    background-size: 24px 24px;
+  }
+
+  .hero-circle-1 {
+    position: absolute;
+    right: -10vw;
+    top: 50%;
+    transform: translateY(-50%);
+    width: clamp(200px, 45vw, 700px);
+    height: clamp(200px, 45vw, 700px);
+    border-radius: 50%;
+    border: 1px solid #B8733330;
+    opacity: 0.6;
+  }
+
+  .hero-circle-2 {
+    position: absolute;
+    right: -5vw;
+    top: 50%;
+    transform: translateY(-50%);
+    width: clamp(140px, 30vw, 500px);
+    height: clamp(140px, 30vw, 500px);
+    border-radius: 50%;
+    border: 1px solid #D4956A40;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: clamp(24px, 4vw, 60px);
+    width: 100%;
+    max-width: 1200px;
+    align-items: center;
+  }
+
+  .hero-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #E8C49A;
+    margin-bottom: 20px;
+    transition: all 0.8s ease 0.1s;
+  }
+
+  .hero-h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(38px, 6vw, 96px);
+    font-weight: 300;
+    line-height: 1.05;
+    color: #FFFFFF;
+    transition: all 0.9s ease 0.2s;
+  }
+
+  .hero-tagline {
+    font-size: clamp(14px, 2vw, 16px);
+    color: #FFFFFF90;
+    margin-top: 24px;
+    max-width: 480px;
+    line-height: 1.7;
+    transition: all 0.9s ease 0.4s;
+  }
+
+  .hero-ctas {
+    margin-top: 40px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    transition: all 0.9s ease 0.55s;
+  }
+
+  .btn-primary {
+    padding: 11px 28px;
+    background: #B87333;
+    color: #FFFFFF;
+    border-radius: 3px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+
+  .btn-primary:hover {
+    background: #D4956A;
+  }
+
+  .btn-secondary {
+    padding: 11px 28px;
+    border: 1px solid #FFFFFF40;
+    color: #FFFFFF;
+    border-radius: 3px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: border-color 0.2s;
+    white-space: nowrap;
+  }
+
+  .btn-secondary:hover {
+    border-color: #D4956A;
+  }
+
+  .hero-avatar {
+    width: clamp(72px, 12vw, 160px);
+    height: clamp(72px, 12vw, 160px);
+    border-radius: 50%;
+    background: linear-gradient(135deg, #B87333, #C9962A);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 5vw, 72px);
+    font-weight: 300;
+    color: #FFFFFF;
+    border: 3px solid #E8C49A50;
+    flex-shrink: 0;
+    transition: all 1s ease 0.5s;
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    transition: opacity 1s ease 1.2s;
+  }
+
+  /* ── SECTION LABEL ── */
+  .section-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #B87333;
+    margin-bottom: 8px;
+  }
+
+  .section-h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 4vw, 56px);
+    font-weight: 300;
+    color: #2C2420;
+    line-height: 1.1;
+  }
+
+  /* ── ABOUT ── */
+  .about-section {
+    background: #FAF7F2;
+    padding: clamp(48px, 8vw, 100px) clamp(16px, 8vw, 120px);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(24px, 5vw, 80px);
+    align-items: start;
+  }
+
+  .bio-p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #6B4C3B;
+    margin-bottom: 20px;
+  }
+
+  .socials {
+    margin-top: 32px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .social-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 1px solid #E8C49A;
+    border-radius: 3px;
+    font-size: 13px;
+    color: #6B4C3B;
+    text-decoration: none;
+    background: #FFFFFF;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .social-btn:hover {
+    border-color: #B87333;
+    color: #B87333;
+  }
+
+  .skills-card {
+    background: #FFFFFF;
+    border: 1px solid #E8C49A;
+    border-radius: 4px;
+    padding: clamp(20px, 4vw, 40px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skills-corner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-top: 60px solid #B87333;
+    border-right: 60px solid transparent;
+  }
+
+  .skills-corner-label {
+    position: absolute;
+    top: 8px;
+    left: 6px;
+    font-size: 10px;
+    color: #FFFFFF;
+    letter-spacing: 0.1em;
+    transform: rotate(-45deg);
+    transform-origin: center;
+  }
+
+  .skills-subtitle {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #B87333;
+    margin-bottom: 20px;
+    margin-top: 8px;
+  }
+
+  .skills-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* ── PROJECTS ── */
+  .projects-section {
+    background: #FFFFFF;
+    padding: clamp(48px, 8vw, 100px) clamp(16px, 8vw, 120px);
+  }
+
+  .project-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .project-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 6vw, 64px);
+    font-weight: 300;
+    color: #B8733320;
+    line-height: 1;
+  }
+
+  .project-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 3vw, 42px);
+    font-weight: 400;
+    color: #2C2420;
+  }
+
+  .project-subtitle {
+    font-size: 14px;
+    color: #9C7B6E;
+    margin-top: 2px;
+  }
+
+  .project-inner {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: clamp(20px, 4vw, 60px);
+    align-items: start;
+  }
+
+  .project-desc {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #6B4C3B;
+    margin-bottom: 20px;
+  }
+
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #B87333;
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid #E8C49A;
+    padding-bottom: 2px;
+    transition: border-color 0.2s;
+  }
+
+  .project-link:hover {
+    border-color: #B87333;
+  }
+
+  .project-divider {
+    margin-top: 56px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #E8C49A, transparent);
+  }
+
+  .screens-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    background: linear-gradient(150deg, #2C2420 0%, #6B4C3B 100%);
+    padding: clamp(64px, 10vw, 120px) clamp(16px, 8vw, 120px) 64px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-decor {
+    position: absolute;
+    right: 5%;
+    bottom: -10%;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    border: 1px solid #B8733320;
+  }
+
+  .contact-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+  }
+
+  .contact-h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5vw, 72px);
+    font-weight: 300;
+    color: #FFFFFF;
+    line-height: 1.1;
+    margin-bottom: 24px;
+  }
+
+  .contact-p {
+    font-size: clamp(14px, 2vw, 16px);
+    color: #FFFFFF80;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  .contact-btns {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .contact-btn {
+    padding: 12px 24px;
+    border: 1px solid #B87333;
+    border-radius: 3px;
+    font-size: 13px;
+    color: #E8C49A;
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .contact-btn:hover {
+    background: #B87333;
+    color: #FFFFFF;
+  }
+
+  .footer-bar {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid #B8733320;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: #FFFFFF60;
+  }
+
+  .footer-copy {
+    font-size: 12px;
+    color: #FFFFFF40;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── DIAGONAL DIVIDER ── */
+  .divider-wrap {
+    margin-bottom: -1px;
+    line-height: 0;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-avatar {
+      display: none;
+    }
+
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .project-inner {
+      grid-template-columns: 1fr !important;
+    }
+
+    .screens-grid {
+      grid-template-columns: 1fr !important;
+    }
+
+    .nav-links {
+      gap: 16px;
+      font-size: 11px;
+    }
+
+    .project-num {
+      display: none;
+    }
+
+    .contact-decor {
+      display: none;
+    }
+  }
+
+  @media (min-width: 641px) and (max-width: 900px) {
+    .hero-grid {
+      grid-template-columns: 1fr auto;
+    }
+
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .project-inner {
+      grid-template-columns: 1fr !important;
+    }
+
+    .screens-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-ctas {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .hero-ctas a {
+      text-align: center;
+    }
+
+    .socials {
+      gap: 8px;
+    }
+  }
+</style>
+
+<div class="portfolio-root" id="root">
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <span class="nav-logo">V<span style="color:#B87333">.</span></span>
+    <div class="nav-links">
+      <a href="#about">À propos</a>
+      <a href="#projects">Projets</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-texture"></div>
+      <div class="hero-circle-1"></div>
+      <div class="hero-circle-2"></div>
+
+      <div class="hero-grid" id="heroContent">
+        <div>
+          <h1 class="hero-h1" id="e2" style="opacity:0;transform:translateY(30px)">
+            Vincent Gautier<br>
+            <em style="color:#E8C49A;font-style:italic">Développeur Frontend Senior</em>
+          </h1>
+          <p class="hero-tagline" id="e3" style="opacity:0;transform:translateY(20px)">
+            React · TypeScript · Architecture UI
+          </p>
+          <div class="hero-ctas" id="e4" style="opacity:0;transform:translateY(20px)">
+            <a href="#projects" class="btn-primary">Voir les projets</a>
+            <a href="#about" class="btn-secondary">À propos</a>
+          </div>
+        </div>
+        <div id="e5" style="opacity:0;transform:scale(0.8);transition:all 1s ease 0.5s">
+          <div class="hero-avatar">V</div>
+        </div>
+      </div>
+
+      <div class="scroll-indicator" id="scrollInd" style="opacity:0">
+        <span style="font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#E8C49A">Scroll</span>
+        <div
+          style="width:1px;height:40px;background:linear-gradient(to bottom,#E8C49A,transparent);animation:scrollPulse 2s ease-in-out infinite">
+        </div>
+      </div>
+    </section>
+
+    <!-- DIVIDER cream -->
+    <div class="divider-wrap">
+      <svg viewBox="0 0 100 80" preserveAspectRatio="none" style="display:block;width:100%;height:80px">
+        <polygon points="0,0 100,0 100,80 0,0" fill="#2C2420" />
+        <polygon points="0,0 100,80 0,80" fill="#FAF7F2" />
+      </svg>
+    </div>
+
+    <!-- ABOUT -->
+    <section id="about" class="about-section">
+      <div style="max-width:1200px;margin:0 auto">
+        <div class="reveal" style="margin-bottom:56px" data-reveal>
+          <p class="section-eyebrow">01 — Profil</p>
+          <h2 class="section-h2">À <em style="font-style:italic;color:#B87333">propos</em></h2>
+        </div>
+
+        <div class="about-grid">
+          <div>
+            <p class="bio-p reveal delay-1" data-reveal>7 ans d'expérience en développement frontend, spécialisé dans
+              les applications React et React Native à forte densité de données.</p>
+            <p class="bio-p reveal delay-2" data-reveal>Je conçois des interfaces performantes, accessibles et
+              maintenables — des prototypes aux déploiements institutionnels à grande échelle.</p>
+            <p class="bio-p reveal delay-3" data-reveal>Également formateur et mentor chez OpenClassrooms, où
+              j'accompagne des développeurs juniors dans leur montée en compétences.</p>
+            <div class="socials reveal delay-4" data-reveal>
+              <a href="https://github.com/Efrasius" class="social-btn"><span
+                  style="font-size:11px;font-weight:700">⌥</span> GitHub</a>
+              <a href="https://linkedin.com/in/vincent-gautier-05774a122" class="social-btn"><span
+                  style="font-size:11px;font-weight:700">in</span> LinkedIn</a>
+              <a href="mailto:v.gautier.dev@proton.me" class="social-btn"><span
+                  style="font-size:11px;font-weight:700">@</span> Email</a>
+            </div>
+          </div>
+
+          <div class="reveal-right delay-2" data-reveal>
+            <div class="skills-card">
+              <div class="skills-corner"></div>
+              <span class="skills-corner-label">skills</span>
+              <p class="skills-subtitle">Technologies & domaines</p>
+              <div class="skills-pills">
+                <span class="skill-pill">React</span>
+                <span class="skill-pill">React Native</span>
+                <span class="skill-pill">TypeScript</span>
+                <span class="skill-pill">JavaScript</span>
+                <span class="skill-pill">Supabase</span>
+                <span class="skill-pill">NodeJS</span>
+                <span class="skill-pill">APIRest</span>
+                <span class="skill-pill">TailwindCSS</span>
+                <span class="skill-pill">Jest</span>
+                <span class="skill-pill">PostgreSQL/SQL</span>
+                <span class="skill-pill">Git</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIVIDER white -->
+    <div class="divider-wrap">
+      <svg viewBox="0 0 100 80" preserveAspectRatio="none" style="display:block;width:100%;height:80px">
+        <polygon points="0,0 100,0 100,0 0,80" fill="#FAF7F2" />
+        <polygon points="100,0 100,80 0,80" fill="#FFFFFF" />
+      </svg>
+    </div>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="projects-section">
+      <div style="max-width:1200px;margin:0 auto">
+        <div class="reveal" style="margin-bottom:64px" data-reveal>
+          <p class="section-eyebrow">02 — Réalisations</p>
+          <h2 class="section-h2">Mes <em style="font-style:italic;color:#B87333">projets</em></h2>
+        </div>
+
+        <!-- Project 1 -->
+        <div data-project="0" style="margin-bottom:72px">
+          <div class="project-header reveal" data-reveal>
+            <div style="display:flex;align-items:baseline;gap:16px">
+              <span class="project-num">01</span>
+              <div>
+                <h3 class="project-title">Mentalkiz</h3>
+                <p class="project-subtitle">Plateforme de santé mentale scolaire</p>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;flex-shrink:0">
+              <span style="font-size:12px;color:#9C7B6E">2024</span>
+              <span class="badge-production"
+                style="font-size:11px;padding:3px 10px;border-radius:999px;letter-spacing:.06em">En production</span>
+            </div>
+          </div>
+          <div class="project-inner">
+            <div class="reveal-left delay-1" data-reveal>
+              <p class="project-desc">Application React + Supabase + microbackend NodeJS de suivi et soutien
+                psychologique des particuliers.
+                La difficulté principale du projet a été de mettre en place un double système permettant à la fois aux
+                utilisateurs d'utiliser facilement les programmes,
+                de suivre leurs infos et stats tout en permettant à des consultants du milieu médical de pouvoir créer
+                tout ce contenu sans aucune connaissance technique.
+              </p>
+              <p class="project-desc">
+                L'optimisation était un facteur clé, que ce soit pour le nombre de requêtes ou le traitement des données
+                qui, vu l'architecture utilisant supabase avec React,
+                reposait en bonne partie sur le côté client. La mise en place d'outils avancés de react, comme la
+                memoization, le choix de design patterns pour simplifier le
+                déploiement et l'implémentation des derniers systèmes de state management furent nécessaires.
+              </p>
+              <p class="project-desc">
+                Les discussions pour déployer le projet dans les établissements scolaires et de santé d'Île-de-France
+                étant en cours, la sécurisation des données personnelles
+                est au coeur du projet. Un système robuste de chiffrage des données avec un double système de clé de
+                chiffrement a été mis en place pour s'assurer que nul, pas
+                même nous ne puissions récupérer des données sensibles.
+              </p>
+              <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">
+                <span class="skill-pill">React</span>
+                <span class="skill-pill">TypeScript</span>
+                <span class="skill-pill">PostgreSQL</span>
+                <span class="skill-pill">Supabase</span>
+                <span class="skill-pill">Santé</span>
+              </div>
+              <a href="https://mentalkiz.com" class="project-link">Voir le projet →</a>
+            </div>
+            <div class="reveal-right delay-2" data-reveal>
+              <div class="screens-grid">
+                <div class="screen-placeholder" style="grid-column:1/-1"><img alt="screen de la page d'accueil"
+                    src="./mentalkiz accueil.png" style="width: 100%;object-fit: cover" /></div>
+                <div class="screen-placeholder"><img alt="screen d'un des questionnaires"
+                    src="./mentalkiz questionnaire.png" style="width: 100%;object-fit: cover" /></div>
+                <div class="screen-placeholder"><img alt="screen du suivi des sessions"
+                    src="./mentalkiz suivi de sessions.png" style="width: 100%;object-fit: cover" /></div>
+                <div class="screen-placeholder"><img alt="screen du graphique des données" src="./mentalkiz graph 2.png"
+                    style="width: 100%;object-fit: cover" /></div>
+                <div class="screen-placeholder"><img alt="screen d'une page de l'éditeur"
+                    src="./mentalkiz editeur interaction.png" style="width: 100%;object-fit: cover" /></div>
+
+              </div>
+            </div>
+          </div>
+          <div class="project-divider"></div>
+        </div>
+
+        <!-- Project 2 -->
+        <div data-project="1" style="margin-bottom:72px">
+          <div class="project-header reveal" data-reveal>
+            <div style="display:flex;align-items:baseline;gap:16px">
+              <span class="project-num">02</span>
+              <div>
+                <h3 class="project-title">k<b>E</b>y-sport</h3>
+                <p class="project-subtitle">Géolocalisation indoor en temps réel</p>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;flex-shrink:0">
+              <span style="font-size:12px;color:#9C7B6E">2026</span>
+              <span class="badge-production"
+                style="font-size:11px;padding:3px 10px;border-radius:999px;letter-spacing:.06em">Phase MVP</span>
+            </div>
+          </div>
+          <div class="project-inner" style="grid-template-columns:1.6fr 1fr">
+            <div class="reveal-right delay-1" data-reveal style="order:1">
+              <p class="project-desc">
+                Un CEO d'équipe esport n'a aucun moyen d'engager directement sa fanbase entre les matchs. Les réseaux
+                sociaux sont fragmentés, les apps de suivi génériques n'ont aucune identité, et les fans passifs ne
+                reviennent pas. L'objectif était de construire une app white-label déployable pour n'importe quelle
+                structure esport, en commençant par Mandatory (Valorant, WoW) — avec un système d'engagement
+                communautaire autour des prédictions de matchs.
+              </p>
+              <p class="project-desc">
+                Le premier défi technique était de permettre une personnalisation poussée par équipe sans dupliquer la
+                codebase. J'ai mis en place un système de configuration typé (TeamConfig) qui centralise le thème, les
+                feature flags et les contenus par équipe. Chaque build Expo pointe vers une config différente via EAS
+                Build, ce qui génère des apps store séparées à partir d'une seule codebase. Les feature flags permettent
+                d'activer ou désactiver des fonctionnalités entières par équipe sans condition dans le code métier — les
+                composants lisent la config via un hook useTeamConfig() et s'affichent ou non en conséquence.
+              </p>
+              <p class="project-desc">
+                Plutôt que d'intégrer une API esport payante (PandaScore à 500€/mois, inutile pour un MVP), j'ai
+                construit une Cloud Function TypeScript planifiée qui appelle l'API MediaWiki de Liquipedia toutes les
+                heures, parse les tableaux de matchs via node-html-parser, normalise les données dans un format interne,
+                et les écrit dans Firestore. L'app mobile ne touche jamais Liquipedia directement — elle lit uniquement
+                Firestore. Ça garantit zéro dépendance externe côté client, un coût API nul pendant la phase de
+                validation, et une migration transparente vers un feed payant si nécessaire.
+              </p>
+              <p class="project-desc">
+                La logique de points est entièrement serverside via Cloud Functions Firebase pour éviter toute
+                possibilité de triche côté client. Une fonction se déclenche sur la mise à jour du statut d'un match
+                vers finished, compare le résultat aux prédictions enregistrées dans Firestore, et distribue les points
+                en batch. Le leaderboard est recalculé en temps réel via un listener Firestore côté app.
+              </p>
+              <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">
+                <span class="skill-pill">React Native</span>
+                <span class="skill-pill">Expo</span>
+                <span class="skill-pill">Typescript</span>
+                <span class="skill-pill">Firebase</span>
+                <span class="skill-pill">Jest</span>
+                <span class="skill-pill">API Rest</span>
+              </div>
+            </div>
+            <div class="reveal-left delay-2" data-reveal style="order:0">
+              <div class="screens-grid" style="grid-template-columns:1fr">
+                <div class="screen-placeholder">
+                  <img alt="page de plan en temps réel" src="./keysport.png" style="height: 100%;object-fit: cover" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="project-divider"></div>
+        </div>
+
+        <!-- Project 3 -->
+        <div data-project="1" style="margin-bottom:72px">
+          <div class="project-header reveal" data-reveal>
+            <div style="display:flex;align-items:baseline;gap:16px">
+              <span class="project-num">03</span>
+              <div>
+                <h3 class="project-title">Indoor Geolocation</h3>
+                <p class="project-subtitle">Géolocalisation indoor en temps réel</p>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;flex-shrink:0">
+              <span style="font-size:12px;color:#9C7B6E">2023</span>
+              <span class="badge-production"
+                style="font-size:11px;padding:3px 10px;border-radius:999px;letter-spacing:.06em">Terminé</span>
+            </div>
+          </div>
+          <div class="project-inner" style="grid-template-columns:1.6fr 1fr">
+            <div class="reveal-right delay-1" data-reveal style="order:1">
+              <p class="project-desc">
+                Création, dans une équipe déjà formée, d'une application web de suivi en temps réel d'objets marqués par
+                des tags dans
+                des bâtiments.
+              </p>
+              <p class="project-desc">
+                L'objectif ici était à la fois de parvenir à gérer un flux de données conséquent et à l'optimiser tout
+                en affichant dans
+                des plans la position de chaque objet, gérer les états d'alerte, les pertes de contact avec le matériel.
+                Chaque objet
+                suivi était marqué d'un tag et des balises marquant la salle permettaient de les localiser avec une
+                précision de moins d'un
+                mètre. Ensuite, l'API de motorolla permettait de récupérer les coordonnées relatives de chaque objet
+                pour pouvoir les mettre
+                sur le plan.
+              </p>
+              <p class="project-desc">
+                L'interface devant bouger en temps réel et gérer des données précises avec des timings serrés, il a
+                fallu travailler à la
+                fois sur le backend php pour gérer la récupération des données et aussi sur l'opti du front pour
+                qu'aucun temps de chargement
+                ou problème d'affichage ne fausse le suivi d'objets parfois critiques.
+              </p>
+              <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">
+                <span class="skill-pill">React</span><span class="skill-pill">PhP</span><span class="skill-pill">API
+                  Rest</span>
+              </div>
+            </div>
+            <div class="reveal-left delay-2" data-reveal style="order:0">
+              <div class="screens-grid" style="grid-template-columns:1fr">
+                <div class="screen-placeholder">
+                  <img alt="page de plan en temps réel" src="./géoloc plan.png" style="width: 100%;object-fit: cover" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="project-divider"></div>
+        </div>
+
+        <!-- Project 4 -->
+        <div data-project="2" style="margin-bottom:24px">
+          <div class="project-header reveal" data-reveal>
+            <div style="display:flex;align-items:baseline;gap:16px">
+              <span class="project-num">04</span>
+              <div>
+                <h3 class="project-title">Mentorat OpenClassrooms</h3>
+                <p class="project-subtitle">Accompagnement de 50+ étudiants</p>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;flex-shrink:0">
+              <span style="font-size:12px;color:#9C7B6E">2020 → 2024</span>
+            </div>
+          </div>
+          <div class="project-inner">
+            <div class="reveal-left delay-1" data-reveal>
+              <p class="project-desc">4 ans de mentorat intensif sur les parcours Développeur Frontend et PhP Symfony.
+                Sessions hebdomadaires, revues de code, préparation aux soutenances. Suivi de plus de 50 étudiants
+                jusqu'à la certification.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">
+                <span class="skill-pill">Pédagogie</span><span class="skill-pill">React</span><span
+                  class="skill-pill">JavaScript</span><span class="skill-pill">Code Review</span>
+                  <span class="skill-pill">PhP</span><span class="skill-pill">Symfony</span>
+              </div>
+            </div>
+            <div class="reveal-right delay-2" data-reveal>
+              <div class="screens-grid" style="grid-template-columns:1fr">
+                <div class="screen-placeholder"><span
+                    style="position:relative;z-index:1;text-align:center;padding:16px">📷 Session de mentorat</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIVIDER dark -->
+    <div class="divider-wrap">
+      <svg viewBox="0 0 100 80" preserveAspectRatio="none" style="display:block;width:100%;height:80px">
+        <polygon points="0,0 100,0 100,80 0,0" fill="#FFFFFF" />
+        <polygon points="0,0 100,80 0,80" fill="#2C2420" />
+      </svg>
+    </div>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact-section">
+      <div class="contact-decor"></div>
+      <div class="contact-inner">
+        <p class="section-eyebrow reveal" data-reveal style="color:#E8C49A">03 — Contact</p>
+        <h2 class="contact-h2 reveal delay-1" data-reveal>Travaillons<br><em
+            style="font-style:italic;color:#E8C49A">ensemble</em></h2>
+        <p class="contact-p reveal delay-2" data-reveal>Disponible pour des postes en CDI <br /> et des collaborations
+          open source.</p>
+        <div class="contact-btns reveal delay-3" data-reveal>
+          <a href="https://github.com/" class="contact-btn">GitHub</a>
+          <a href="https://linkedin.com/in/vincent-gautier-05774a122" class="contact-btn">LinkedIn</a>
+          <a href="mailto:v.gautier.dev@proton.me" class="contact-btn">Email</a>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <span class="footer-name">Vincent Gautier<span style="color:#B87333">.</span></span>
+        <span class="footer-copy">© 2026</span>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  setTimeout(() => {
+    ['e1', 'e2', 'e3', 'e4'].forEach((id, i) => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.style.transition = `all 0.9s ease ${0.1 + i * 0.15}s`;
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      }
+    });
+    const e5 = document.getElementById('e5');
+    if (e5) { e5.style.opacity = '1'; e5.style.transform = 'none'; }
+    const si = document.getElementById('scrollInd');
+    if (si) si.style.opacity = '0.6';
+  }, 120);
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+
+  const mq640 = window.matchMedia('(max-width: 640px)');
+  const mq900 = window.matchMedia('(max-width: 900px)');
+
+  function applyResponsive() {
+    const isMobile = mq640.matches;
+    const isTablet = mq900.matches && !isMobile;
+
+    document.querySelectorAll('.project-inner').forEach((el, i) => {
+      if (isMobile || isTablet) {
+        el.style.gridTemplateColumns = '1fr';
+        el.querySelectorAll('[style*="order"]').forEach(child => {
+          child.style.order = '';
+        });
+      } else {
+        if (i === 1) {
+          el.style.gridTemplateColumns = '1.6fr 1fr';
+        } else {
+          el.style.gridTemplateColumns = '1fr 1.6fr';
+        }
+      }
+    });
+
+    document.querySelectorAll('.screens-grid').forEach(el => {
+      if (isMobile) el.style.gridTemplateColumns = '1fr';
+    });
+  }
+
+  applyResponsive();
+  mq640.addEventListener('change', applyResponsive);
+  mq900.addEventListener('change', applyResponsive);
+</script>
