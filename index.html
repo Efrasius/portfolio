@@ -877,183 +877,195 @@
               <a href="https://mentalkiz.com" class="project-link">Voir le projet →</a>
             </div>
             <div class="reveal-right delay-2" data-reveal>
-              <div class="screens-grid">
+              <div style="display: flex; flex-direction:column;">
                 <div class="screen-placeholder" style="grid-column:1/-1"><img alt="screen de la page d'accueil"
                     src="./mentalkiz accueil.png" style="width: 100%;object-fit: cover" /></div>
-                <div class="screen-placeholder"><img alt="screen d'un des questionnaires"
-                    src="./mentalkiz questionnaire.png" style="width: 100%;object-fit: cover" /></div>
-                <div class="screen-placeholder"><img alt="screen du suivi des sessions"
-                    src="./mentalkiz suivi de sessions.png" style="width: 100%;object-fit: cover" /></div>
-                <div class="screen-placeholder"><img alt="screen du graphique des données" src="./mentalkiz graph 2.png"
-                    style="width: 100%;object-fit: cover" /></div>
-                <div class="screen-placeholder"><img alt="screen d'une page de l'éditeur"
-                    src="./mentalkiz editeur interaction.png" style="width: 100%;object-fit: cover" /></div>
+                <div style="display:flex;justify-content:space-between;margin-top:5px;">
+                  <div class="screen-placeholder" style="width: 45%;"><img alt="screen d'un des questionnaires"
+                      src="./mentalkiz questionnaire.png" style="width: 100%;object-fit: cover" /></div>
+                  <div class="screen-placeholder" style="width: 45%;"><img alt="screen du suivi des sessions"
+                      src="./mentalkiz suivi de sessions.png" style="width: 100%;object-fit: cover" /></div>
+                </div>
+                <div style="display:flex;justify-content:space-between;margin-top:5px;">
+                  <div class="screen-placeholder" style="width: 45%;"><img alt="screen du graphique des données"
+                      src="./mentalkiz graph 2.png" style="width: 100%;object-fit: cover" /></div>
+                  <div class="screen-placeholder" style="width: 45%;"><img alt="screen d'une page de l'éditeur"
+                      src="./mentalkiz editeur interaction.png" style="width: 100%;object-fit: cover" /></div>
+                  </div>
 
-              </div>
-            </div>
-          </div>
-          <div class="project-divider"></div>
-        </div>
-
-        <!-- Project 2 -->
-        <div data-project="1" style="margin-bottom:72px">
-          <div class="project-header reveal" data-reveal>
-            <div style="display:flex;align-items:baseline;gap:16px">
-              <span class="project-num">02</span>
-              <div>
-                <h3 class="project-title">k<b>E</b>y-sport</h3>
-                <p class="project-subtitle">Géolocalisation indoor en temps réel</p>
-              </div>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px;flex-shrink:0">
-              <span style="font-size:12px;color:#9C7B6E">2026</span>
-              <span class="badge-production"
-                style="font-size:11px;padding:3px 10px;border-radius:999px;letter-spacing:.06em">Phase MVP</span>
-            </div>
-          </div>
-          <div class="project-inner" style="grid-template-columns:1.6fr 1fr">
-            <div class="reveal-right delay-1" data-reveal style="order:1">
-              <p class="project-desc">
-                Un CEO d'équipe esport n'a aucun moyen d'engager directement sa fanbase entre les matchs. Les réseaux
-                sociaux sont fragmentés, les apps de suivi génériques n'ont aucune identité, et les fans passifs ne
-                reviennent pas. L'objectif était de construire une app white-label déployable pour n'importe quelle
-                structure esport, en commençant par Mandatory (Valorant, WoW) — avec un système d'engagement
-                communautaire autour des prédictions de matchs.
-              </p>
-              <p class="project-desc">
-                Le premier défi technique était de permettre une personnalisation poussée par équipe sans dupliquer la
-                codebase. J'ai mis en place un système de configuration typé (TeamConfig) qui centralise le thème, les
-                feature flags et les contenus par équipe. Chaque build Expo pointe vers une config différente via EAS
-                Build, ce qui génère des apps store séparées à partir d'une seule codebase. Les feature flags permettent
-                d'activer ou désactiver des fonctionnalités entières par équipe sans condition dans le code métier — les
-                composants lisent la config via un hook useTeamConfig() et s'affichent ou non en conséquence.
-              </p>
-              <p class="project-desc">
-                Plutôt que d'intégrer une API esport payante (PandaScore à 500€/mois, inutile pour un MVP), j'ai
-                construit une Cloud Function TypeScript planifiée qui appelle l'API MediaWiki de Liquipedia toutes les
-                heures, parse les tableaux de matchs via node-html-parser, normalise les données dans un format interne,
-                et les écrit dans Firestore. L'app mobile ne touche jamais Liquipedia directement — elle lit uniquement
-                Firestore. Ça garantit zéro dépendance externe côté client, un coût API nul pendant la phase de
-                validation, et une migration transparente vers un feed payant si nécessaire.
-              </p>
-              <p class="project-desc">
-                La logique de points est entièrement serverside via Cloud Functions Firebase pour éviter toute
-                possibilité de triche côté client. Une fonction se déclenche sur la mise à jour du statut d'un match
-                vers finished, compare le résultat aux prédictions enregistrées dans Firestore, et distribue les points
-                en batch. Le leaderboard est recalculé en temps réel via un listener Firestore côté app.
-              </p>
-              <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">
-                <span class="skill-pill">React Native</span>
-                <span class="skill-pill">Expo</span>
-                <span class="skill-pill">Typescript</span>
-                <span class="skill-pill">Firebase</span>
-                <span class="skill-pill">Jest</span>
-                <span class="skill-pill">API Rest</span>
-              </div>
-            </div>
-            <div class="reveal-left delay-2" data-reveal style="order:0">
-              <div class="screens-grid" style="grid-template-columns:1fr">
-                <div class="screen-placeholder">
-                  <img alt="page de plan en temps réel" src="./keysport.png" style="height: 100%;object-fit: cover" />
                 </div>
               </div>
             </div>
+            <div class="project-divider"></div>
           </div>
-          <div class="project-divider"></div>
-        </div>
 
-        <!-- Project 3 -->
-        <div data-project="1" style="margin-bottom:72px">
-          <div class="project-header reveal" data-reveal>
-            <div style="display:flex;align-items:baseline;gap:16px">
-              <span class="project-num">03</span>
-              <div>
-                <h3 class="project-title">Indoor Geolocation</h3>
-                <p class="project-subtitle">Géolocalisation indoor en temps réel</p>
+          <!-- Project 2 -->
+          <div data-project="1" style="margin-bottom:72px">
+            <div class="project-header reveal" data-reveal>
+              <div style="display:flex;align-items:baseline;gap:16px">
+                <span class="project-num">02</span>
+                <div>
+                  <h3 class="project-title">k<b>E</b>y-sport</h3>
+                  <p class="project-subtitle">Géolocalisation indoor en temps réel</p>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;flex-shrink:0">
+                <span style="font-size:12px;color:#9C7B6E">2026</span>
+                <span class="badge-production"
+                  style="font-size:11px;padding:3px 10px;border-radius:999px;letter-spacing:.06em">Phase MVP</span>
               </div>
             </div>
-            <div style="display:flex;align-items:center;gap:12px;flex-shrink:0">
-              <span style="font-size:12px;color:#9C7B6E">2023</span>
-              <span class="badge-production"
-                style="font-size:11px;padding:3px 10px;border-radius:999px;letter-spacing:.06em">Terminé</span>
-            </div>
-          </div>
-          <div class="project-inner" style="grid-template-columns:1.6fr 1fr">
-            <div class="reveal-right delay-1" data-reveal style="order:1">
-              <p class="project-desc">
-                Création, dans une équipe déjà formée, d'une application web de suivi en temps réel d'objets marqués par
-                des tags dans
-                des bâtiments.
-              </p>
-              <p class="project-desc">
-                L'objectif ici était à la fois de parvenir à gérer un flux de données conséquent et à l'optimiser tout
-                en affichant dans
-                des plans la position de chaque objet, gérer les états d'alerte, les pertes de contact avec le matériel.
-                Chaque objet
-                suivi était marqué d'un tag et des balises marquant la salle permettaient de les localiser avec une
-                précision de moins d'un
-                mètre. Ensuite, l'API de motorolla permettait de récupérer les coordonnées relatives de chaque objet
-                pour pouvoir les mettre
-                sur le plan.
-              </p>
-              <p class="project-desc">
-                L'interface devant bouger en temps réel et gérer des données précises avec des timings serrés, il a
-                fallu travailler à la
-                fois sur le backend php pour gérer la récupération des données et aussi sur l'opti du front pour
-                qu'aucun temps de chargement
-                ou problème d'affichage ne fausse le suivi d'objets parfois critiques.
-              </p>
-              <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">
-                <span class="skill-pill">React</span><span class="skill-pill">PhP</span><span class="skill-pill">API
-                  Rest</span>
+            <div class="project-inner" style="grid-template-columns:1.6fr 1fr">
+              <div class="reveal-right delay-1" data-reveal style="order:1">
+                <p class="project-desc">
+                  Un CEO d'équipe esport n'a aucun moyen d'engager directement sa fanbase entre les matchs. Les réseaux
+                  sociaux sont fragmentés, les apps de suivi génériques n'ont aucune identité, et les fans passifs ne
+                  reviennent pas. L'objectif était de construire une app white-label déployable pour n'importe quelle
+                  structure esport, en commençant par Mandatory (Valorant, WoW) — avec un système d'engagement
+                  communautaire autour des prédictions de matchs.
+                </p>
+                <p class="project-desc">
+                  Le premier défi technique était de permettre une personnalisation poussée par équipe sans dupliquer la
+                  codebase. J'ai mis en place un système de configuration typé (TeamConfig) qui centralise le thème, les
+                  feature flags et les contenus par équipe. Chaque build Expo pointe vers une config différente via EAS
+                  Build, ce qui génère des apps store séparées à partir d'une seule codebase. Les feature flags
+                  permettent
+                  d'activer ou désactiver des fonctionnalités entières par équipe sans condition dans le code métier —
+                  les
+                  composants lisent la config via un hook useTeamConfig() et s'affichent ou non en conséquence.
+                </p>
+                <p class="project-desc">
+                  Plutôt que d'intégrer une API esport payante (PandaScore à 500€/mois, inutile pour un MVP), j'ai
+                  construit une Cloud Function TypeScript planifiée qui appelle l'API MediaWiki de Liquipedia toutes les
+                  heures, parse les tableaux de matchs via node-html-parser, normalise les données dans un format
+                  interne,
+                  et les écrit dans Firestore. L'app mobile ne touche jamais Liquipedia directement — elle lit
+                  uniquement
+                  Firestore. Ça garantit zéro dépendance externe côté client, un coût API nul pendant la phase de
+                  validation, et une migration transparente vers un feed payant si nécessaire.
+                </p>
+                <p class="project-desc">
+                  La logique de points est entièrement serverside via Cloud Functions Firebase pour éviter toute
+                  possibilité de triche côté client. Une fonction se déclenche sur la mise à jour du statut d'un match
+                  vers finished, compare le résultat aux prédictions enregistrées dans Firestore, et distribue les
+                  points
+                  en batch. Le leaderboard est recalculé en temps réel via un listener Firestore côté app.
+                </p>
+                <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">
+                  <span class="skill-pill">React Native</span>
+                  <span class="skill-pill">Expo</span>
+                  <span class="skill-pill">Typescript</span>
+                  <span class="skill-pill">Firebase</span>
+                  <span class="skill-pill">Jest</span>
+                  <span class="skill-pill">API Rest</span>
+                </div>
               </div>
-            </div>
-            <div class="reveal-left delay-2" data-reveal style="order:0">
-              <div class="screens-grid" style="grid-template-columns:1fr">
-                <div class="screen-placeholder">
-                  <img alt="page de plan en temps réel" src="./géoloc plan.png" style="width: 100%;object-fit: cover" />
+              <div class="reveal-left delay-2" data-reveal style="order:0">
+                <div class="screens-grid" style="grid-template-columns:1fr">
+                  <div class="screen-placeholder">
+                    <img alt="page de plan en temps réel" src="./keysport.png" style="height: 100%;object-fit: cover" />
+                  </div>
                 </div>
               </div>
             </div>
+            <div class="project-divider"></div>
           </div>
-          <div class="project-divider"></div>
-        </div>
 
-        <!-- Project 4 -->
-        <div data-project="2" style="margin-bottom:24px">
-          <div class="project-header reveal" data-reveal>
-            <div style="display:flex;align-items:baseline;gap:16px">
-              <span class="project-num">04</span>
-              <div>
-                <h3 class="project-title">Mentorat OpenClassrooms</h3>
-                <p class="project-subtitle">Accompagnement de 50+ étudiants</p>
+          <!-- Project 3 -->
+          <div data-project="1" style="margin-bottom:72px">
+            <div class="project-header reveal" data-reveal>
+              <div style="display:flex;align-items:baseline;gap:16px">
+                <span class="project-num">03</span>
+                <div>
+                  <h3 class="project-title">Indoor Geolocation</h3>
+                  <p class="project-subtitle">Géolocalisation indoor en temps réel</p>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;flex-shrink:0">
+                <span style="font-size:12px;color:#9C7B6E">2023</span>
+                <span class="badge-production"
+                  style="font-size:11px;padding:3px 10px;border-radius:999px;letter-spacing:.06em">Terminé</span>
               </div>
             </div>
-            <div style="display:flex;align-items:center;gap:12px;flex-shrink:0">
-              <span style="font-size:12px;color:#9C7B6E">2020 → 2024</span>
+            <div class="project-inner" style="grid-template-columns:1.6fr 1fr">
+              <div class="reveal-right delay-1" data-reveal style="order:1">
+                <p class="project-desc">
+                  Création, dans une équipe déjà formée, d'une application web de suivi en temps réel d'objets marqués
+                  par
+                  des tags dans
+                  des bâtiments.
+                </p>
+                <p class="project-desc">
+                  L'objectif ici était à la fois de parvenir à gérer un flux de données conséquent et à l'optimiser tout
+                  en affichant dans
+                  des plans la position de chaque objet, gérer les états d'alerte, les pertes de contact avec le
+                  matériel.
+                  Chaque objet
+                  suivi était marqué d'un tag et des balises marquant la salle permettaient de les localiser avec une
+                  précision de moins d'un
+                  mètre. Ensuite, l'API de motorolla permettait de récupérer les coordonnées relatives de chaque objet
+                  pour pouvoir les mettre
+                  sur le plan.
+                </p>
+                <p class="project-desc">
+                  L'interface devant bouger en temps réel et gérer des données précises avec des timings serrés, il a
+                  fallu travailler à la
+                  fois sur le backend php pour gérer la récupération des données et aussi sur l'opti du front pour
+                  qu'aucun temps de chargement
+                  ou problème d'affichage ne fausse le suivi d'objets parfois critiques.
+                </p>
+                <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">
+                  <span class="skill-pill">React</span><span class="skill-pill">PhP</span><span class="skill-pill">API
+                    Rest</span>
+                </div>
+              </div>
+              <div class="reveal-left delay-2" data-reveal style="order:0">
+                <div class="screens-grid" style="grid-template-columns:1fr">
+                  <div class="screen-placeholder">
+                    <img alt="page de plan en temps réel" src="./géoloc plan.png"
+                      style="width: 100%;object-fit: cover" />
+                  </div>
+                </div>
+              </div>
             </div>
+            <div class="project-divider"></div>
           </div>
-          <div class="project-inner">
-            <div class="reveal-left delay-1" data-reveal>
-              <p class="project-desc">4 ans de mentorat intensif sur les parcours Développeur Frontend et PhP Symfony.
-                Sessions hebdomadaires, revues de code, préparation aux soutenances. Suivi de plus de 50 étudiants
-                jusqu'à la certification.</p>
-              <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">
-                <span class="skill-pill">Pédagogie</span><span class="skill-pill">React</span><span
-                  class="skill-pill">JavaScript</span><span class="skill-pill">Code Review</span>
+
+          <!-- Project 4 -->
+          <div data-project="2" style="margin-bottom:24px">
+            <div class="project-header reveal" data-reveal>
+              <div style="display:flex;align-items:baseline;gap:16px">
+                <span class="project-num">04</span>
+                <div>
+                  <h3 class="project-title">Mentorat OpenClassrooms</h3>
+                  <p class="project-subtitle">Accompagnement de 50+ étudiants</p>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;flex-shrink:0">
+                <span style="font-size:12px;color:#9C7B6E">2020 → 2024</span>
+              </div>
+            </div>
+            <div class="project-inner">
+              <div class="reveal-left delay-1" data-reveal>
+                <p class="project-desc">4 ans de mentorat intensif sur les parcours Développeur Frontend et PhP Symfony.
+                  Sessions hebdomadaires, revues de code, préparation aux soutenances. Suivi de plus de 50 étudiants
+                  jusqu'à la certification.</p>
+                <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">
+                  <span class="skill-pill">Pédagogie</span><span class="skill-pill">React</span><span
+                    class="skill-pill">JavaScript</span><span class="skill-pill">Code Review</span>
                   <span class="skill-pill">PhP</span><span class="skill-pill">Symfony</span>
+                </div>
               </div>
-            </div>
-            <div class="reveal-right delay-2" data-reveal>
-              <div class="screens-grid" style="grid-template-columns:1fr">
-                <div class="screen-placeholder"><span
-                    style="position:relative;z-index:1;text-align:center;padding:16px">📷 Session de mentorat</span>
+              <div class="reveal-right delay-2" data-reveal>
+                <div class="screens-grid" style="grid-template-columns:1fr">
+                  <div class="screen-placeholder"><span
+                      style="position:relative;z-index:1;text-align:center;padding:16px">📷 Session de mentorat</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
     </section>
 
     <!-- DIVIDER dark -->
